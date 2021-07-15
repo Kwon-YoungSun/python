@@ -1,0 +1,236 @@
+3. 조건문
+3-1. 불 자료형과 if 조건문
+불 자료형은 오직 True와 False 값만 가진다. python에서 불 자료형은 반드시 대문자로 시작한다.
+
+< 불 만들기 : 비교 연산자 >
+예 ] 숫자 비교
+	>>> print(10 == 100)
+	False
+	>>> print(10 != 100)
+	True
+	>>> print(10 < 100)
+	True
+	>>> print(10 > 100)
+	False
+	>>> print(10 <= 100)
+	True
+	>>> print(10 >= 100)
+	False
+
+예 ] 문자열 비교
+	>>> print("가방" == "가방")
+	True
+	>>> print("가방" != "하마")
+	True
+	>>> print("가방" < "하마")
+	True
+	>>> print("가방" > "하마")
+	False
+
+참고 ] 범위 구하기
+>>> x = 25
+>>> print(10 < x < 30)
+True
+>>> print(40 < x < 60)
+False
+
+< 불 연산하기 : 논리 연산자 >
+불끼리는 논리 연산자를 사용할 수 있다.
+- not	: 불을 반대로 전환
+
+	예 ]
+		>>> print(not True)
+		False
+		>>> print(not False)
+		True
+- and
+- or
+
+< if 조건문 >
+예 ]
+	>>> if True:
+		print("True 입니다...!")
+		print("정말 True입니다...!")
+
+	
+	True 입니다...!
+	정말 True입니다...!
+	>>> if False :
+		print("False 입니다...!")
+	
+	==> True이면 실행되고 False 이면 실행되지 않음
+
+<날짜/시간 활용하기>
+# 날짜/시간과 관련된 기능을 가져옵니다.
+import datetime				<== 모듈 기능을 활용해서 datetime 기능 가져오기
+
+# 현재 날짜/시간을 구합니다.
+now = datetime.datetime.now()
+
+# 출력합니다.
+print(now.year, "년")
+print(now.month, "월")
+print(now.day, "일")
+print(now.hour, "시")
+print(now.minute, "분")
+print(now.second, "초")
+
+# 다른 방법으로 출력합니다.
+print("{}년 {}월 {}일 {}시 {}분 {}초".format(
+    now.year,
+    now.month,
+    now.day,
+    now.hour,
+    now.minute,
+    now.second
+))
+
+참고 ] 파이썬에서 월 출력하기
+	대부분의 프로그래밍 언어에서는 월을 0~11 까지로 출력하지만
+	파이썬은 1월~12월로 출력한다.
+
+참고 ] 파이썬에서 줄이 길어질 때
+	줄이 길어질 때는 \ 기호를 입력하고 줄바꿈해서 코드를 입력한다.
+	
+	예 ]
+		# 입력을 받습니다.
+		number = input("정수 입력> ")
+
+		# 마지막 자리 숫자를 추출
+		last_character = number[-1]
+
+		# 숫자로 변환하기
+		last_number = int(last_character)
+
+		# 짝수 확인
+		if last_number == 0 \
+    		or last_number == 2 \
+    		or last_number == 4 \
+    		or last_number == 6 \
+    		or last_number == 8:
+    			print("짝수입니다")
+
+		# 홀수 확인
+		if last_number == 1 \
+    		or last_number == 3 \
+    		or last_number == 5 \
+    		or last_number == 7 \
+    		or last_number == 9:
+    			print("홀수입니다")
+
+< 컴퓨터의 조건 >
+	in 연산자 : 어떤 문자열 내부에 찾고자 하는 문자열이 있는지를 확인할 때 사용
+	
+	예 ]
+		# 입력을 받습니다.
+		number = input("정수 입력> ")
+		last_character = number[-1]
+
+		# 짝수 조건
+		if last_character in "02468":
+    			print("짝수입니다")
+
+		# 홀수 조건
+		if last_character in "13579":
+    			print("홀수입니다")
+
+---------------------------------------------------------------------------------------------------------
+3-2. if~else와 elif 구문
+< else 조건문의 활용 >
+예 ]
+	# 입력을 받습니다.
+	number = input("정수 입력> ")
+	number = int(number)
+
+	# 조건문을 사용합니다.
+	if number % 2 == 0:
+    	# 조건이 참일 때, 즉 짝수 조건
+    		print("짝수입니다.")
+	else:
+    	# 조건이 거짓일 때, 즉 홀수 조건
+    		print("홀수입니다.")
+
+<elif 구문>
+c언어의 if~elseif 구문과 같은 역할임
+
+예 ]
+	# 날짜/시간과 관련된 기능을 가져옵니다.
+	import datetime
+
+	# 현재 날짜/시간을 구하고
+	# 쉽게 사용할 수 있게 월을 변수에 저장합니다.
+	now = datetime.datetime.now()
+	month = now.month
+
+	# 조건문으로 계절을 확인합니다.
+	if 3 <= month <= 5:
+    		print("현재는 봄입니다.")
+	elif 6 <= month <= 8:
+    		print("현재는 여름입니다.")
+	elif 9 <= month <= 11:
+    		print("현재는 가을입니다.")
+	else:
+    		print("현재는 겨울입니다.")
+
+< False로 변환되는 값 >
+if 조건의 매개변수에 불이 아닌 다른 값이 올 때는 자동으로 이를 불로 변환해서 처리한다.
+* False로 변환되는 값 : None, 숫자 0과 0.0, 빈 컨테이너(빈 문자열, 빈 바이트열, 빈 리스트, 빈 튜플, 빈 딕셔너리 등)
+==> 이 밖에는 모두, True로 변환된다.
+
+예 ]
+	bool(())	<== False
+	bool(0)		<== False
+	bool({})	<== False
+	bool([])	<== False
+
+예 ]
+print("# if 조건문에 0 넣기")
+if 0:
+    print("0은 True로 변환됩니다")
+else:
+    print("0은 False로 변환됩니다")
+print()
+
+print("# if 조건문에 빈 문자열 넣기")
+if "":
+    print("빈 문자열은 True로 변환됩니다")
+else:
+    print("빈 문자열은 False로 변환됩니다")
+print()
+
+==> 실행결과
+# if 조건문에 0 넣기
+0은 False로 변환됩니다
+
+# if 조건문에 빈 문자열 넣기
+빈 문자열은 False로 변환됩니다
+
+그러나 가독성을 위해서는 if문에 조건문을 명시해서 작성해주는 것이 좋다.
+
+------------------------------------------------------------------------------------------------------
+< pass 키워드 >
+파이썬에서 조건문에 아무 결과도 입력하지 않을 경우 에러가 발생한다.
+	# 입력을 받습니다.
+	number = input("정수 입력>")
+	number = int(number)
+
+	# 조건문 사용
+	if number > 0:
+    		# 양수일 때: 아직 미구현 상태입니다.
+	else:
+    		# 음수일 때: 아직 미구현 상태입니다.
+	===> NotImplementedError 오류 발생!!
+		pass 키워드를 넣어준다.
+
+* pass 키워드 : 아무것도 안함, 또는 곧 개발하겠음의 의미임.
+	# 입력을 받습니다.
+	number = input("정수 입력>")
+	number = int(number)
+
+	# 조건문 사용
+	if number > 0:
+    		# 양수일 때: 아직 미구현 상태입니다.
+    	pass
+	else:
+    		# 음수일 때: 아직 미구현 상태입니다.
+    	pass
