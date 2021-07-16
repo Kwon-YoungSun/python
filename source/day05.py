@@ -284,13 +284,83 @@
 # print("B.", sum_all(end=100))
 # print("C.", sum_all(end=100, step=2))
 
-# 함수를 선언한다.
-def 함수이름(매개변수1, 매개변수2, 매개변수3, 매개변수4):
-    print("안녕하세요" + str(매개변수1))
-    print("안녕하세요" + str(매개변수2))
-    return 매개변수1 + 매개변수2 + 매개변수3 + 매개변수4
-    print("안녕하세요" + str(매개변수3))
-    print("안녕하세요" + str(매개변수4))
+# # 함수를 선언한다.
+# def 함수이름(매개변수1, 매개변수2, 매개변수3, 매개변수4):
+#     print("안녕하세요" + str(매개변수1))
+#     print("안녕하세요" + str(매개변수2))
+#     return 매개변수1 + 매개변수2 + 매개변수3 + 매개변수4
+#     print("안녕하세요" + str(매개변수3))
+#     print("안녕하세요" + str(매개변수4))
 
-# 함수를 호출한다.
-print(함수이름(1, 2, 3, 4))
+# # 함수를 호출한다.
+# print(함수이름(1, 2, 3, 4))
+
+# def reverse(list):
+#     for i in range(len(list)):
+#         yield list[-i - 1]
+
+# list_a = range(1, 11)
+# list_b = reverse(list_a)
+# print(list(list_b))
+
+
+# # def test():
+# #     print("A 지점 통과")
+# #     yield 1
+# #     print("B 지점 통과")
+# #     yield 2
+# #     print("C 지점 통과")
+# # # 함수를 호출합니다.
+# # output = test()
+# # # next() 함수를 호출합니다.
+# # print("D 지점 통과")
+# # a = next(output)
+# # print(a)
+# # print("E 지점 통과")
+# # b = next(output)
+# # print(b)
+# # print("F 지점 통과")
+# # c = next(output)
+# # print(c)
+# # # 한 번 더 실행하기
+# # next(output)
+
+# def 함수():
+#     print("출력A")
+#     yield 100
+#     print("출력B")
+#     yield 200
+#     print("출력C")
+#     yield 300
+#     print("출력D")
+
+# # 제너레이터 = 함수()
+# # print(next(제너레이터))
+# # next(제너레이터)
+# # next(제너레이터)
+# # next(제너레이터)
+# # next(제너레이터)
+
+# 제너레이터 = 함수()
+# for i in 제너레이터:
+#     print(i)
+
+# for i in 제너레이터:
+#     print(i)
+
+# numbers = [1, 2, 3, 4, 5, 6]
+# # print("::".join(str(i) for i in numbers))
+# print("::".join(map(str, numbers)))
+
+numbers = list(range(1, 10 + 1))
+
+print("홀수만 추출하기")
+print(list(filter(lambda x: x % 2 != 0, numbers)))
+print()
+
+print("3 이상, 7 미만 추출하기")
+print(list(filter(lambda x: 3 <= x < 7, numbers)))
+print()
+
+print("# 제곱해서 50 미만 추출하기")
+print(list(filter(lambda x: x**2 < 50, numbers)))
