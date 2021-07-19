@@ -214,3 +214,133 @@
     ====> 데코레이터를 사용하면 functools라는 모듈 사용 가능 및 반복되는 구문이 많아질 때 유용하게 사용 가능하다.
 
     주의 ] 데코레이터는 다른 프로그래밍 언어의 어노테이션과는 전혀 다른 기능이므로 주의하자.
+--------------------------------------------------------------------------------------------------------------------------------
+7-3. 모듈 만들기
+    7-3-1. 모듈 만들기
+        module_basic의 test_module.py와 main.py 참고
+
+    7-3-2. __name__=="__main__"
+        
+        < __name__ >
+            - 프로그래밍 언어에서는 프로그램의 진입점을 엔트리 포인트 또는 메인이라고 부름
+            - 이러한 엔트리 포인트 또는 메인 내부에서의 __name__은 "__main__" 이다.
+
+        < 모듈의 __name__ >
+            모듈 내부에서 __name__을 출력하면 모듈의 이름을 나타냄.
+            
+            예 ]
+                >>> __name__
+                '__main__'
+
+            예 ]
+                # main.py 파일
+                import test_module 
+
+                print("# 메인의 __name__ 출력하기")
+                print(__name__)
+                print()
+                -------------------------------------------
+                # test_module.py 파일
+                print("# 모듈의 __name__ 출력하기")
+
+                print(__name__)
+                print()
+
+                ===> 실행 결과 ]
+                    # 모듈의 __name__ 출력하기
+                    test_module
+
+                    # 메인의 __name__ 출력하기
+                    __main__
+
+        < __name__ 활용하기 >
+            # test_module
+            PI = 3.141592
+
+            def number_input():
+                output = input("숫자 입력>")
+                return float(output)
+
+            def get_circumference(radius):
+                return 2 * PI * radius
+
+            def get_circle_area(radius):
+                return PI * radius * radius
+
+            # 활용 예
+            if __name__ == "__main__":          # 현재 파일이 엔트리 포인트(main.py)인지 확인하고, 엔트리포인트일 때만 실행한다.
+                print("get_circumference(10): ", get_circumference(10))
+                print("get_circle_area(10): ", get_circle_area(10))
+            ---------------------------------------
+
+            # main
+            import test_module as test
+
+            radius = test.number_input()
+            print(test.get_circumference(radius))
+            print(test.get_circle_area(radius))
+
+            ===> 실행 결과
+                숫자 입력>10
+                62.83184
+                314.1592
+
+    7-3-3. 패키지
+        원래 pip는 Python Package Index의 줄임말로 패키지 관리 시스템이다. 즉,
+        모듈이 모여서 구조를 이루면 패키지라고 부른다.
+
+        < 패키지 만들기 >
+            package_example 예제 참고
+
+        < __init__.py 파일 >
+            패키지를 읽을 때 어떤 처리를 수행해야 하거나 패키지 내부의 모듈들을 한꺼번에 가져오고 싶을 때 __init__.py 파일을 만들어 사용함
+            package_example의 __init__.py와 main_1.py 참고
+
+            참고 ] 파이썬 3.3 이전 버전에서는 __init__.py 파일이 무조건 있어야 패키지로 작동했으나
+                    이후 버전에서는 __init__.py 파일이 없어도 폴더 내부에 파이썬 파일이 들어 있기만 하면 패키지로 작동한다.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------
+좀 더 알아보기 ] 
+    1) 텍스트 데이터
+        우리가 쉽게 읽을 수 있는 형태의 데이터
+        텍스트 에디터로 편집할 수 있는 데이터
+        
+        예 ] ASCII 인코딩 방식
+            예를 들어 "Hello Python Programming"이라는 글자를 메모장에 적고 저장하면
+            내부적으로는 ASCII 코드표에 따라 대응하는 2진수로 저장된다.
+
+    2) 바이너리 데이터
+        텍스트 에디터로 열었을 때 의미를 이해할 수 없는 데이터
+        일반적으로는 텍스트 에디터로 편집할 수 없음
+
+        예 ] 이미지와 동영상
+
+    < 인코딩과 디코딩 >
+        - 인코딩
+            텍스트 데이터를 맞춰서 우리가 읽기 쉬운 글자로 보여주는 변환을 하는 것
+            또는 바이너리 데이터를 읽어서 이미지나 동영상 등의 볼 수 있는 형태로 보여주는 변환을 하는 것
+
+            예 ]
+                텍스트 데이터: ASCII, UTF-8, UTF-16, EUC-KR, Shift-JIS 등
+                바이너리 데이터: JPEG, PNG, GIF 등
+
+        - 디코딩
+            인코딩된 데이터를 반대로 돌리는 것
+
+    < 인터넷의 이미지 저장하기 >
+        파일을 열 때 뒤에 "b"를 붙여주면 된다.
+        "rb" 또는 "wb"로 적으면 바이너리 형식으로 파일을 읽고 써줌
+        주의! 바이너리 파일을 사용할 때 b를 안 붙이면 오류남.
+        
+        # 모듈을 읽어 들입니다.
+        from urllib import request
+
+        # urlopen() 함수로 구글의 메인 페이지를 읽습니다.
+        target = request.urlopen("http://www.hanbit.co.kr/images/common/logo_hanbit.png")
+        output = target.read()
+        print(output)
+
+        # write binary[바이너리 쓰기] 모드로
+        file = open("output.png", "wb")
+        file.write(output)
+        file.close()
